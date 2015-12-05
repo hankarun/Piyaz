@@ -1,0 +1,7 @@
+<sync-adapter xmlns:android="http://schemas.android.com/apk/res/android"
+    android:contentAuthority="com.hankarun.piyangoogren"
+    android:accountType="piyangoogren.hankarun.com"
+    android:userVisible="true"
+    android:allowParallelSyncs="true"
+    android:isAlwaysSyncable="true"
+    android:supportsUploading="true"/>

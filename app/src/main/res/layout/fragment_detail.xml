@@ -1,0 +1,165 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:scrollbars="vertical"
+    tools:context=".DetailFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@color/colorPrimary" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <RelativeLayout
+                android:id="@+id/cardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/headerTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Çekiliş Sonucu" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/numberRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/headerTextView"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tarihView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/numberRecycler"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Tarih"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/detailView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/cardNumber"
+                android:layout_marginTop="20dp"
+                android:text="Eski sonuçlar..." />
+
+            <RelativeLayout
+                android:id="@+id/statsRelative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detailView"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/haftaTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Haftanın En Az Çıkan Şanslı Numaraları" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/haftaRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/haftaTextView"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="horizontal" />
+
+                <TextView
+                    android:id="@+id/haftaAyrinti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/haftaRecycler"
+                    android:text="İstatistiklikler..." />
+
+                <TextView
+                    android:id="@+id/ayTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/haftaRecycler"
+                    android:layout_marginTop="20dp"
+                    android:singleLine="false"
+                    android:text="Ayın En Az Çıkan Şanslı Numaraları" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/ayRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/ayTextView"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="horizontal" />
+
+
+                <TextView
+                    android:id="@+id/ayAyrinti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/ayRecycler"
+                    android:text="İstatistiklikler..." />
+
+                <TextView
+                    android:id="@+id/tumTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ayRecycler"
+                    android:layout_marginTop="20dp"
+                    android:text="Tum Zamanların En Az Çıkan Şanslı Numaraları" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/tumRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/tumTextView"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="horizontal" />
+
+                <TextView
+                    android:id="@+id/seneAyrinti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@+id/tumRecycler"
+                    android:text="İstatistiklikler..." />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/randomButtonActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statsRelative"
+                android:layout_marginTop="20dp"
+                android:text="Rastgele Numara Seç" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>
+
+
