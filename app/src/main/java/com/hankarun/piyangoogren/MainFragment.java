@@ -33,6 +33,7 @@ public class MainFragment extends Fragment implements AdapterOnClick{
     public MainFragment() {
     }
 
+    CustomRecyclerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,13 +43,11 @@ public class MainFragment extends Fragment implements AdapterOnClick{
         ButterKnife.bind(this, rootView);
 
         String[] newArray = new String[4];
-        for(int x = 0; x < Statics.menu.size(); x++)
-            newArray[x] = getValue(getContext(),Statics.menu.get(x));
-
-        newArray[3] = "1";
+        for(int x = 0; x < Statics.menuOriginal.size(); x++)
+            newArray[x] = getValue(getContext(),Statics.menuOriginal.get(x));
 
 
-        CustomRecyclerAdapter adapter = new CustomRecyclerAdapter(Statics.menu,this,newArray);
+        adapter = new CustomRecyclerAdapter(Statics.menu,this,newArray);
 
         mRecyclerView.setHasFixedSize(true);
 
@@ -79,7 +78,9 @@ public class MainFragment extends Fragment implements AdapterOnClick{
 
     @Override
     public void onClick(int position, CustomRecyclerAdapter.ViewHolder holder) {
-        save(getContext(),Statics.menu.get(position),"0");
+        save(getContext(),Statics.menuOriginal.get(position),"0");
+        adapter.newArray[position] = "0";
+        adapter.notifyDataSetChanged();
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("index", position);
         getActivity().startActivity(intent);

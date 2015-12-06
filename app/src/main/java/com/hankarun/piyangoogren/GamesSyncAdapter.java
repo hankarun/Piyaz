@@ -51,6 +51,11 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
         try {
+            //save(context,Statics.menuOriginal.get(2),"1");
+            //save(context,Statics.menuOriginal.get(1),"1");
+
+            //syncUpdateInterface.updated(Statics.menuOriginal.get(0)+","+Statics.menuOriginal.get(1));
+
             for (String game : Statics.menuOriginal) {
                 //Do this for all of the five games.
                 boolean check = true;
@@ -110,7 +115,7 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
 
                     //Saving new games.
                     if (allLocalGames != null && allLocalGames.moveToFirst()) {
-                        gamesName = gamesName + " " + game;
+                        gamesName = gamesName + "," + game;
                         save(context,game,"1");
                         Game gamed = Game.fromCursor(allLocalGames);
                         gamed.setmNumbers(getNumbers(gamed.getmDate(), gamed.getmType()));
@@ -124,6 +129,9 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
             if(!gamesName.equals("")){
                 syncUpdateInterface.updated(gamesName);
             }
+
+
+
 
             for (String game : Statics.menuOriginal) {
                 //Check for empty dates
@@ -219,8 +227,7 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
             // Convert the InputStream into a string
             StringWriter writer = new StringWriter();
             IOUtils.copy(is, writer, "UTF-8");
-            String contentAsString = writer.toString();
-            return contentAsString;
+            return writer.toString();
 
         } finally {
             if (is != null) {
@@ -229,8 +236,8 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
+    public String readIt(InputStream stream, int len) throws IOException {
+        Reader reader;
         reader = new InputStreamReader(stream, "UTF-8");
         char[] buffer = new char[len];
         reader.read(buffer);

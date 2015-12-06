@@ -31,11 +31,27 @@ public class GameSyncService extends Service implements SyncUpdateInterface{
 
     @Override
     public void updated(String s) {
+        String[] temp = s.split("\\,");
+
+        String results = "";
+        for(String ee:temp)
+            results = results + "," + Statics.menu.get(Statics.menuOriginal.indexOf(ee));
+        results = results.substring(1);
+
+        String total;
+        if(temp.length>1){
+            total = "çekilişleri";
+        }else{
+            total = "çekilişi";
+        }
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(getApplicationContext())
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("Yeni çekilis sonucu.")
-                        .setContentText(s + "çekilişi yapıldı. Sonuçlar için tıklayınız.");
+                        .setAutoCancel(true)
+                        .setContentText(results +" " + total +" yapıldı. Sonuçlar için tıklayınız.");
+
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
 

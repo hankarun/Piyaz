@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAdapter.ViewHolder>{
     private ArrayList<String> menu;
     private AdapterOnClick itemClick;
-    private String[] newArray;
+    String[] newArray;
 
     public CustomRecyclerAdapter(ArrayList<String> menu, AdapterOnClick onClick, String[] options){
         this.menu = menu;
