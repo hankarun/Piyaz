@@ -188,7 +188,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                 break;
             case 1:
                 if (data != null && data.moveToFirst()) {
-                    Log.d("again", "stats");
                     gameStats = new ArrayList<>();
                     gameStats.add(Stats.fromCursor(data));
                     //Conver cursor to stat array

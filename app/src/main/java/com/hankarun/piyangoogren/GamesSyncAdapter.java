@@ -102,7 +102,8 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
                     }
                 }
             }
-            String gamesName = "";
+            int[] s = {0,0,0,0};
+            boolean notify = false;
             for (String game : Statics.menuOriginal) {
                 //Check for empty dates
                 //Fill them on the background
@@ -115,8 +116,9 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
 
                     //Saving new games.
                     if (allLocalGames != null && allLocalGames.moveToFirst()) {
-                        gamesName = gamesName + "," + game;
-                        save(context,game,"1");
+                        s[Statics.menuOriginal.indexOf(game)] = 1;
+                        notify = true;
+                        save(context, game, "1");
                         Game gamed = Game.fromCursor(allLocalGames);
                         gamed.setmNumbers(getNumbers(gamed.getmDate(), gamed.getmType()));
                         provider.update(GamesContentProvider.CONTENT_URI1, gamed.getValues(), null, null);
@@ -126,8 +128,8 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
                     Log.d("error1", e.toString());
                 }
             }
-            if(!gamesName.equals("")){
-                syncUpdateInterface.updated(gamesName);
+            if(notify){
+                syncUpdateInterface.updated(s);
             }
 
 
@@ -177,6 +179,10 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
             JSONObject json = new JSONObject(downloadUrl("http://www.millipiyango.gov.tr/sonuclar/cekilisler/" + type + "/" + date + ".json"));
             JSONObject jObject = json.getJSONObject("data");
             numbers = jObject.getString("rakamlarNumaraSirasi");
+            numbers = numbers.replace("<b>", "");
+            numbers = numbers.replace("</b>", "");
+            String s = jObject.getString("bilenKisiler");
+            Log.d("aa",s);
         } catch (Exception e) {
             Log.d("ss", e.toString());
         }

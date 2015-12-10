@@ -30,16 +30,16 @@ public class GameSyncService extends Service implements SyncUpdateInterface{
     }
 
     @Override
-    public void updated(String s) {
-        String[] temp = s.split("\\,");
-
+    public void updated(int[] s) {
         String results = "";
-        for(String ee:temp)
-            results = results + "," + Statics.menu.get(Statics.menuOriginal.indexOf(ee));
+        for(int x = 0; x < s.length; x++) {
+            if(s[x]==1)
+                results = results + "," + Statics.menu.get(x);
+        }
         results = results.substring(1);
 
         String total;
-        if(temp.length>1){
+        if(s.length>1){
             total = "çekilişleri";
         }else{
             total = "çekilişi";
