@@ -12,8 +12,6 @@ import android.widget.TextView;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

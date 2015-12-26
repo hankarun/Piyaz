@@ -9,9 +9,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SyncRequest;
 import android.content.SyncResult;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -27,7 +25,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -58,7 +55,6 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
 
             for (String game : Statics.menuOriginal) {
                 //Do this for all of the five games.
-                boolean check = true;
                 // Get shows from the remote server for all games
                 ArrayList<Game> remoteGames = getDates(game);
                 // Get shows from the local storage
@@ -81,7 +77,6 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
 
                 //Find different games
                 if (localGames.size() > 0) {
-                    ArrayList<Game> tmps = new ArrayList<>();
                     for (Game localgame : localGames) {
                         remoteGames.remove(localgame);
                     }
@@ -226,7 +221,6 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
             conn.setDoInput(true);
             // Starts the query
             conn.connect();
-            int response = conn.getResponseCode();
             //Log.d("d", "The response is: " + response);
             is = conn.getInputStream();
 

@@ -24,7 +24,6 @@ public class FastScrollRecyclerView extends RecyclerView {
     public float sy;
     public String section;
     public boolean showLetter = false;
-    private Handler listHandler;
 
     public FastScrollRecyclerView(Context context) {
         super(context);
@@ -113,12 +112,9 @@ public class FastScrollRecyclerView extends RecyclerView {
 
             }
             case MotionEvent.ACTION_UP: {
-                listHandler = new ListHandler();
+                Handler listHandler = new ListHandler();
                 listHandler.sendEmptyMessageDelayed(0, 100);
-                if (x < sx - scaledWidth || y < sy || y > (sy + scaledHeight*sections.length))
-                    return super.onTouchEvent(event);
-                else
-                    return true;
+                return !(x < sx - scaledWidth || y < sy || y > (sy + scaledHeight * sections.length)) || super.onTouchEvent(event);
 //                break;
             }
         }

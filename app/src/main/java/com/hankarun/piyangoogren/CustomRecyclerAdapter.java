@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,8 +19,8 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
     private AdapterOnClick itemClick;
     String[] newArray;
 
-    public CustomRecyclerAdapter(ArrayList<String> menu, AdapterOnClick onClick, String[] options){
-        this.menu = menu;
+    public CustomRecyclerAdapter(AdapterOnClick onClick, String[] options){
+        this.menu = Statics.menu;
         this.itemClick = onClick;
         newArray = options;
     }

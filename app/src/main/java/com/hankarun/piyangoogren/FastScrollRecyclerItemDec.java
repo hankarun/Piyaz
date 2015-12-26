@@ -86,11 +86,11 @@ public class FastScrollRecyclerItemDec extends RecyclerView.ItemDecoration {
                 textPaint.setColor(Color.WHITE);
                 textPaint.setAlpha(255);
                 textPaint.setFakeBoldText(true);
-                textPaint.setTextSize((float) (scaledWidth / 2));
+                textPaint.setTextSize(scaledWidth / 2);
                 canvas.drawText(sections[i].toUpperCase(),
                         sx + textPaint.getTextSize() / 2, sy + parent.getPaddingTop()
                                 + scaledHeight * (i + 1), textPaint);
-                textPaint.setTextSize((float) (scaledWidth));
+                textPaint.setTextSize(scaledWidth);
                 canvas.drawText("•",
                         sx - textPaint.getTextSize() / 3, sy + parent.getPaddingTop()
                                 + scaledHeight * (i + 1) + scaledHeight / 3, textPaint);

@@ -7,22 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -60,7 +52,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private NumbersAdapter numbersAdapter;
 
     private ArrayList<Stats> gameStats;
-    private String gameName;
 
     public ArrayList<String> dummy = new ArrayList<String>() {{
         add("1");
@@ -150,7 +141,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        gameName = args.getString("game");
+        String gameName = args.getString("game");
         switch (id) {
             case 0:
                 return new CursorLoader(getActivity(),
@@ -176,8 +167,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             case 0:
                 if (data != null && data.moveToFirst()) {
                     game = Game.fromCursor(data);
-                    String[] temp = game.getmNumbers().replace(" ", "").split("\\-");
-                    numbersAdapter.array = temp;
+                    numbersAdapter.array = game.getmNumbers().replace(" ", "").split("\\-");
                     numbersAdapter.notifyDataSetChanged();
                     tarihView.setText("Çekiliş Tarihi: "+game.getmDateDetail());
                 }

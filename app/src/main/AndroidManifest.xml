@@ -17,11 +17,12 @@
         android:theme="@style/AppTheme">
         <provider
             android:name=".GamesContentProvider"
-            android:authorities="com.hankarun.piyangoogren" />
+            android:authorities="com.hankarun.piyangoogren"
+            android:exported="false"/>
 
         <service
             android:name=".GameSyncService"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
@@ -30,7 +31,8 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/sync_adapter" />
         </service>
-        <service android:name=".AuthenticatorService">
+        <service android:name=".AuthenticatorService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>

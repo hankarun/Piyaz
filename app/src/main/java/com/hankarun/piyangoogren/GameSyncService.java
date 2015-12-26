@@ -5,12 +5,9 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
-import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 
 public class GameSyncService extends Service implements SyncUpdateInterface{
     private static final Object sSyncAdapterLock = new Object();
@@ -50,7 +47,7 @@ public class GameSyncService extends Service implements SyncUpdateInterface{
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("Yeni çekilis sonucu.")
                         .setAutoCancel(true)
-                        .setContentText(results +" " + total +" yapıldı. Sonuçlar için tıklayınız.");
+                        .setContentText(results +" " + total +" güncellendi. Sonuçlar için tıklayınız.");
 
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);

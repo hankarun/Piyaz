@@ -11,9 +11,9 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 
 public class GamesContentProvider extends ContentProvider {
     public static final String AUTHORITY = "com.hankarun.piyangoogren";
@@ -61,7 +61,7 @@ public class GamesContentProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         SQLiteDatabase db;
 
@@ -95,16 +95,15 @@ public class GamesContentProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         return null;
     }
 
     @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
         int uriType = sURIMatcher.match(uri);
         SQLiteDatabase sqlDB;
-        int rowsDeleted = 0;
         long id = 0;
         switch (uriType) {
             case GAMES:
@@ -113,7 +112,7 @@ public class GamesContentProvider extends ContentProvider {
                 break;
             case STATS:
                 sqlDB = sdatabase.getWritableDatabase();
-                insertOrUpdateById(sqlDB, uri, StatisticsDatabaseHelper.TABLE_STATISTICS, values, "_id");
+                insertOrUpdateById(sqlDB, uri, StatisticsDatabaseHelper.TABLE_STATISTICS, values);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -123,15 +122,15 @@ public class GamesContentProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         return 0;
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public int update(@NonNull Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         int uriType = sURIMatcher.match(uri);
         SQLiteDatabase sqlDB;
-        int rowsUpdated = 0;
+        int rowsUpdated;
         switch (uriType) {
             case GAMES:
                 sqlDB = database.getWritableDatabase();
@@ -182,12 +181,12 @@ public class GamesContentProvider extends ContentProvider {
     }
 
     private void insertOrUpdateById(SQLiteDatabase db, Uri uri, String table,
-                                    ContentValues values, String column) throws SQLException {
+                                    ContentValues values) throws SQLException {
         try {
             db.insertOrThrow(table, null, values);
         } catch (SQLiteConstraintException e) {
-            int nrRows = update(Uri.parse("content://" + AUTHORITY + "/" + BASE_STATS_PATH+"/"+values.getAsString("_id")), values, column + "=?",
-                    new String[]{values.getAsString(column)});
+            int nrRows = update(Uri.parse("content://" + AUTHORITY + "/" + BASE_STATS_PATH+"/"+values.getAsString("_id")), values, "_id" + "=?",
+                    new String[]{values.getAsString("_id")});
             if (nrRows == 0)
                 throw e;
         }

@@ -6,24 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainFragment extends Fragment implements AdapterOnClick{
 
@@ -47,7 +38,7 @@ public class MainFragment extends Fragment implements AdapterOnClick{
             newArray[x] = getValue(getContext(),Statics.menuOriginal.get(x));
 
 
-        adapter = new CustomRecyclerAdapter(Statics.menu,this,newArray);
+        adapter = new CustomRecyclerAdapter(this,newArray);
 
         mRecyclerView.setHasFixedSize(true);
 

@@ -69,7 +69,7 @@ public class PlotActivity extends AppCompatActivity implements LoaderManager.Loa
 
         ArrayList<String> spinnerArray = returnSpinnerItems(plot);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, spinnerArray);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, spinnerArray);
         spinner.setAdapter(spinnerArrayAdapter);
 
         Log.d("type", order + "");
