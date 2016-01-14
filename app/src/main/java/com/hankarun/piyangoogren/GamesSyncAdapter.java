@@ -112,7 +112,7 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
                         notify = true;
                         save(context, game, "1");
                         Game gamed = Game.fromCursor(allLocalGames);
-                        gamed.setmNumbers(getNumbers(gamed.getmDate(), gamed.getmType()));
+                        getNumbers(gamed.getmDate(), gamed.getmType(),gamed);
                         provider.update(GamesContentProvider.CONTENT_URI1, gamed.getValues(), null, null);
                         allLocalGames.close();
                     }
@@ -139,7 +139,7 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
                     if (allLocalGames != null) {
                         while (allLocalGames.moveToNext()) {
                             Game gamed = Game.fromCursor(allLocalGames);
-                            gamed.setmNumbers(getNumbers(gamed.getmDate(), gamed.getmType()));
+                            getNumbers(gamed.getmDate(), gamed.getmType(),gamed);
                             provider.update(GamesContentProvider.CONTENT_URI, gamed.getValues(), GamesDatabaseHelper.ID + "=? ", new String[]{String.valueOf(gamed.getmId())});
                         }
                         allLocalGames.close();
@@ -162,10 +162,10 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
         editor = settings.edit();
 
         editor.putString(name, text);
-        editor.commit();
+        editor.apply();
     }
 
-    public String getNumbers(String date, String type) throws RemoteException, IOException {
+    public void getNumbers(String date, String type, Game game) throws RemoteException, IOException {
         String numbers = "";
         try {
             JSONObject json = new JSONObject(downloadUrl("http://www.millipiyango.gov.tr/sonuclar/cekilisler/" + type + "/" + date + ".json"));
@@ -174,11 +174,11 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
             numbers = numbers.replace("<b>", "");
             numbers = numbers.replace("</b>", "");
             String s = jObject.getString("bilenKisiler");
-            Log.d("aa",s);
+            game.setmLukyOnes(s);
         } catch (Exception e) {
             Log.d("ss", e.toString());
         }
-        return numbers;
+        game.setmNumbers(numbers);
     }
 
     public ArrayList<Game> getDates(String type) throws RemoteException, IOException {

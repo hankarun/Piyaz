@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,11 +18,12 @@ public class GamesDatabaseHelper extends SQLiteOpenHelper {
 
     public static String ID = "_id";
 
-    public static String GAMES_NUMBERS = "numbers";
-    public static String GAMES_DATE = "date";
-    public static String GAMES_DATEVIEW = "dateview";
-    public static String GAMES_TYPE = "type";
-    public static String GAMES_STATISTICS = "stats";
+    public static final String GAMES_NUMBERS = "numbers";
+    public static final String GAMES_DATE = "date";
+    public static final String GAMES_DATEVIEW = "dateview";
+    public static final String GAMES_TYPE = "type";
+    public static final String GAMES_STATISTICS = "stats";
+    public static final String GAMES_LUKYONES = "luky";
 
 
 
@@ -32,7 +34,8 @@ public class GamesDatabaseHelper extends SQLiteOpenHelper {
             + GAMES_DATE + " text,"
             + GAMES_DATEVIEW + " text,"
             + GAMES_TYPE + " text,"
-            + GAMES_STATISTICS + " text"
+            + GAMES_STATISTICS + " text,"
+            + GAMES_LUKYONES + " text"
             + ");";
 
 
@@ -43,7 +46,8 @@ public class GamesDatabaseHelper extends SQLiteOpenHelper {
             GAMES_DATE,
             GAMES_DATEVIEW,
             GAMES_TYPE,
-            GAMES_STATISTICS
+            GAMES_STATISTICS,
+            GAMES_LUKYONES
     };
 
     private static final String DATABASE_NAME = "games.db";
@@ -82,8 +86,8 @@ public class GamesDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase checkDB = null;
 
         try{
-            String myPath = context.getFilesDir().getParentFile().getPath() + "/databases/" + DATABASE_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            File myPath = context.getDatabasePath(DATABASE_NAME);
+            return myPath.exists();
         }catch(SQLiteException e){
             Log.d("err", e.getMessage());
         }

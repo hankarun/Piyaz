@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,8 +74,8 @@ public class StatisticsDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase checkDB = null;
 
         try{
-            String myPath = context.getFilesDir().getParentFile().getPath() + "/databases/" + DATABASE_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            File myPath = context.getDatabasePath(DATABASE_NAME);
+            return myPath.exists();
         }catch(SQLiteException e){
             Log.d("err", e.getMessage());
         }

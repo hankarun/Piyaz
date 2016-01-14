@@ -69,11 +69,35 @@
                 android:layout_marginTop="20dp"
                 android:text="Eski sonuçlar..." />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/detailView"
+                android:id="@+id/detailViwe"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:id="@+id/lukyOnes"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/otherView"
+                    android:layout_weight="1"
+                    android:gravity="right" />
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/statsRelative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/detailView"
+                android:layout_below="@+id/detailViwe"
                 android:layout_marginTop="20dp">
 
                 <TextView

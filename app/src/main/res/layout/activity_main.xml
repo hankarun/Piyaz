@@ -48,6 +48,6 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom|center_horizontal"
         ads:adSize="FLUID"
-        ads:adUnitId="@string/emulator_id"/>
+        ads:adUnitId="@string/banner_ad_unit_id"/>
 
 </android.support.design.widget.CoordinatorLayout>

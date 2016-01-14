@@ -65,8 +65,6 @@ public class GamesContentProvider extends ContentProvider {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         SQLiteDatabase db;
 
-
-
         int uriType = sURIMatcher.match(uri);
         switch (uriType) {
             case GAMES:

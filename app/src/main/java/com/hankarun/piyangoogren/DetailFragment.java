@@ -9,6 +9,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     TextView tumTextView;
     @Bind(R.id.numberRecycler)
     RecyclerView mNumberRecycler;
+    @Bind(R.id.lukyOnes)
+    TextView mLukyOnes;
+    @Bind(R.id.otherView)
+    TextView mOthers;
 
 
 
@@ -98,6 +103,8 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         Bundle args = getArguments();
         if (args != null)
             index = args.getInt("index", 0);
+
+
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -174,6 +181,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                 sayisal = new int[setSayisal(game.getmType())];
                 Bundle bundle = new Bundle();
                 bundle.putString("game", game.getmType());
+                String[] see = game.getLukyToString().split("-");
+                mLukyOnes.setText(see[0]);
+                mOthers.setText(see[1]);
                 getLoaderManager().initLoader(1, bundle, this);
                 break;
             case 1:
@@ -184,9 +194,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                     while (data.moveToNext()) {
                         gameStats.add(Stats.fromCursor(data));
                     }
-
                     populateStatistics(gameStats);
-
                 }
                 break;
         }
