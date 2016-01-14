@@ -32,9 +32,6 @@ import java.util.ArrayList;
 
 public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
 
-    public static final int SYNC_INTERVAL = 60 * 180;
-    public static final int SYNC_FLEXTIME = SYNC_INTERVAL / 3;
-
     private SyncUpdateInterface syncUpdateInterface;
 
     public Context context;
@@ -185,7 +182,6 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     public ArrayList<Game> getDates(String type) throws RemoteException, IOException {
-
         ArrayList<Game> tmpList = new ArrayList<>();
         try {
             JSONArray json = new JSONArray(downloadUrl("http://www.millipiyango.gov.tr/sonuclar/listCekilisleriTarihleri.php?tur=" + type));
@@ -275,6 +271,13 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
         return newAccount;
     }
 
+    public static final long SECONDS_PER_MINUTE = 60L;
+    public static final long SYNC_INTERVAL_IN_MINUTES = 60L;
+    public static final long SYNC_INTERVAL =
+            SYNC_INTERVAL_IN_MINUTES *
+                    SECONDS_PER_MINUTE * 12;
+    public static final long SYNC_FLEXTIME = SYNC_INTERVAL / 3;
+
     private static void onAccountCreated(Account newAccount, Context context) {
         /*
          * Since we've created an account
@@ -292,7 +295,7 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
         //syncImmediately(context);
     }
 
-    public static void configurePeriodicSync(Context context, int syncInterval, int flexTime) {
+    public static void configurePeriodicSync(Context context, long syncInterval, long flexTime) {
         Account account = getSyncAccount(context);
         String authority = GamesContentProvider.AUTHORITY;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

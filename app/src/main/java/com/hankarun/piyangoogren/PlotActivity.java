@@ -65,8 +65,6 @@ public class PlotActivity extends AppCompatActivity implements LoaderManager.Loa
             getSupportActionBar().setTitle(Statics.menu.get(extras.getInt("gname"))+" Sonuçları");
         }
 
-
-
         ArrayList<String> spinnerArray = returnSpinnerItems(plot);
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, spinnerArray);
