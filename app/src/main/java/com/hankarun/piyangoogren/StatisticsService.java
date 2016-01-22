@@ -14,7 +14,7 @@ public class StatisticsService extends IntentService {
     private static final String RESULT = "result";
 
     public StatisticsService() {
-        super("ReminderService");
+        super("StaticsService");
     }
 
     public StatisticsService(String name) {
@@ -25,7 +25,7 @@ public class StatisticsService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Cursor allLocalGames = getContentResolver().query(GamesContentProvider.CONTENT_URI,
                 GamesDatabaseHelper.GAMES_PROJECTION,
-                GamesDatabaseHelper.GAMES_NUMBERS + " != '' AND " + GamesDatabaseHelper.GAMES_STATISTICS + " = ''",
+                GamesDatabaseHelper.GAMES_NUMBERS + " != '' AND "+ GamesDatabaseHelper.GAMES_TYPE + " != 'piyango' AND " + GamesDatabaseHelper.GAMES_STATISTICS + " = ''",
                 null,
                 null);
         ArrayList<Game> gameList = new ArrayList<>();

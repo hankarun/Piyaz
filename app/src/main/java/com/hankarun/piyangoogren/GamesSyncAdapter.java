@@ -94,7 +94,7 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
                     }
                 }
             }
-            int[] s = {0,0,0,0};
+            int[] s = {0,0,0,0,0};
             boolean notify = false;
             for (String game : Statics.menuOriginal) {
                 //Check for empty dates
@@ -123,9 +123,6 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
             if(notify){
                 syncUpdateInterface.updated(s);
             }
-
-
-
 
             for (String game : Statics.menuOriginal) {
                 //Check for empty dates
