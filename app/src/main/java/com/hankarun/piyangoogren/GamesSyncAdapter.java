@@ -168,17 +168,22 @@ public class GamesSyncAdapter extends AbstractThreadedSyncAdapter {
     public void getNumbers(String date, String type, Game game) throws RemoteException, IOException {
         String numbers = "";
         try {
-            JSONObject json = new JSONObject(downloadUrl("http://www.millipiyango.gov.tr/sonuclar/cekilisler/" + type + "/" + date + ".json"));
-            JSONObject jObject = json.getJSONObject("data");
-            numbers = jObject.getString("rakamlarNumaraSirasi");
-            numbers = numbers.replace("<b>", "");
-            numbers = numbers.replace("</b>", "");
-            String s = jObject.getString("bilenKisiler");
-            game.setmLukyOnes(s);
+            if(!type.equals("piyango")) {
+                JSONObject json = new JSONObject(downloadUrl("http://www.millipiyango.gov.tr/sonuclar/cekilisler/" + type + "/" + date + ".json"));
+                JSONObject jObject = json.getJSONObject("data");
+                numbers = jObject.getString("rakamlarNumaraSirasi");
+                numbers = numbers.replace("<b>", "");
+                numbers = numbers.replace("</b>", "");
+                String s = jObject.getString("bilenKisiler");
+                game.setmLukyOnes(s);
+                game.setmNumbers(numbers);
+            }else{
+                JSONObject json = new JSONObject(downloadUrl("http://www.millipiyango.gov.tr/sonuclar/cekilisler/" + type + "/" + date + ".json"));
+                game.setmNumbers(json.toString());
+            }
         } catch (Exception e) {
             Log.d("ss", e.toString());
         }
-        game.setmNumbers(numbers);
     }
 
     public ArrayList<Game> getDates(String type) throws RemoteException, IOException {

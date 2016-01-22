@@ -57,6 +57,8 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
             case 3:
                 holder.banner.setImageResource(R.drawable.on_n);
                 break;
+            case 4:
+                holder.banner.setImageResource(R.drawable.mpi_logo);
         }
 
         holder.layout.setOnClickListener(new View.OnClickListener() {

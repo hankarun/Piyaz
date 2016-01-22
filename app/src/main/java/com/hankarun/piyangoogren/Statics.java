@@ -10,6 +10,7 @@ public class Statics {
         add("Super Loto");
         add("Sans Topu");
         add("On Numara");
+        add("Milli Piyango");
     }};
 
     public final static ArrayList<String> menuOriginal = new ArrayList<String>() {{
@@ -17,6 +18,7 @@ public class Statics {
         add("superloto");
         add("sanstopu");
         add("onnumara");
+        add("piyango");
     }};
 
     public static int setSayisal(String gametype){

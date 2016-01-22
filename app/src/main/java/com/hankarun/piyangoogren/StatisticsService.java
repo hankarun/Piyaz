@@ -95,6 +95,7 @@ public class StatisticsService extends IntentService {
             tmp.setmGame(game.returnWeek());
 
             getContentResolver().insert(GamesContentProvider.CONTENT_URI_STATS, tmp.getValues());
+            publishResults(0);
         }
     }
 

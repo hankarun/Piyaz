@@ -33,7 +33,7 @@ public class MainFragment extends Fragment implements AdapterOnClick{
 
         ButterKnife.bind(this, rootView);
 
-        String[] newArray = new String[4];
+        String[] newArray = new String[5];
         for(int x = 0; x < Statics.menuOriginal.size(); x++)
             newArray[x] = getValue(getContext(),Statics.menuOriginal.get(x));
 
