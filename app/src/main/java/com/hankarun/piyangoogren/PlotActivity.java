@@ -74,9 +74,6 @@ public class PlotActivity extends AppCompatActivity implements LoaderManager.Loa
         spinner.setSelection(order);
         spinner.setOnItemSelectedListener(this);
 
-
-
-
         getLoaderManager().initLoader(0, extras, this);
     }
 
@@ -338,8 +335,6 @@ public class PlotActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-
 
     private class Tuple{
         int name;

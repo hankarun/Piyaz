@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +17,7 @@
         <provider
             android:name=".GamesContentProvider"
             android:authorities="com.hankarun.piyangoogren"
-            android:exported="false"/>
+            android:exported="false" />
 
         <service
             android:name=".GameSyncService"
@@ -31,7 +30,8 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/sync_adapter" />
         </service>
-        <service android:name=".AuthenticatorService"
+        <service
+            android:name=".AuthenticatorService"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
@@ -90,8 +90,8 @@
         <activity
             android:name=".ResultsActivity"
             android:label="@string/title_activity_results"
-            android:screenOrientation="portrait"
             android:parentActivityName=".DetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -100,8 +100,17 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.hankarun.piyangoogren.MainActivity" />
+        </activity>
+        <activity
+            android:name=".PiyangoActivity"
+            android:label="@string/title_activity_piyango"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hankarun.piyangoogren.MainActivity" />

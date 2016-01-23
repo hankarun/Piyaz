@@ -78,7 +78,8 @@ public class MainFragment extends Fragment implements AdapterOnClick{
             intent.putExtra("index", position);
             getActivity().startActivity(intent);
         } else {
-            Toast.makeText(getActivity(), "New fragment", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), PiyangoActivity.class);
+            getActivity().startActivity(intent);
         }
     }
 }
