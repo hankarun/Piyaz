@@ -10,6 +10,8 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,6 +88,19 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mRecyclerView.setAdapter(mAdapter);
+
+        TextWatcher watcher = new TextWatcher() {
+            public void onTextChanged(CharSequence s, int start,int before, int count)
+            {
+                // TODO Track text move to the next
+            }
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void afterTextChanged(Editable s) {
+            }
+        };
 
         getLoaderManager().initLoader(0, null, this);
     }
