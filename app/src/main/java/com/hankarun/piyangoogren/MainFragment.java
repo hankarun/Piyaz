@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -69,11 +70,15 @@ public class MainFragment extends Fragment implements AdapterOnClick{
 
     @Override
     public void onClick(int position, CustomRecyclerAdapter.ViewHolder holder) {
-        save(getContext(),Statics.menuOriginal.get(position),"0");
+        save(getContext(), Statics.menuOriginal.get(position), "0");
         adapter.newArray[position] = "0";
         adapter.notifyDataSetChanged();
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
-        intent.putExtra("index", position);
-        getActivity().startActivity(intent);
+        if(!Statics.menuOriginal.get(position).equals("piyango")) {
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
+            intent.putExtra("index", position);
+            getActivity().startActivity(intent);
+        } else {
+            Toast.makeText(getActivity(), "New fragment", Toast.LENGTH_SHORT).show();
+        }
     }
 }
