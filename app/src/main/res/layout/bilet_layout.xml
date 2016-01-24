@@ -28,7 +28,6 @@
             android:ems="10"
             android:id="@+id/editText"
             android:maxLength="1"
-            style="@style/Base.V7.Widget.AppCompat.EditText"
             android:background="@drawable/old_edit"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical|center_horizontal" />
@@ -40,7 +39,6 @@
             android:ems="10"
             android:id="@+id/editText2"
             android:maxLength="1"
-            style="@style/Base.V7.Widget.AppCompat.EditText"
             android:background="@drawable/old_edit"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical|center_horizontal" />
@@ -52,7 +50,6 @@
             android:ems="10"
             android:id="@+id/editText3"
             android:maxLength="1"
-            style="@style/Base.V7.Widget.AppCompat.EditText"
             android:background="@drawable/old_edit"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical|center_horizontal" />
@@ -64,7 +61,6 @@
             android:ems="10"
             android:id="@+id/editText4"
             android:maxLength="1"
-            style="@style/Base.V7.Widget.AppCompat.EditText"
             android:background="@drawable/old_edit"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical|center_horizontal" />
@@ -76,7 +72,6 @@
             android:ems="10"
             android:id="@+id/editText5"
             android:maxLength="1"
-            style="@style/Base.V7.Widget.AppCompat.EditText"
             android:background="@drawable/old_edit"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical|center_horizontal" />
@@ -88,7 +83,6 @@
             android:ems="10"
             android:id="@+id/editText6"
             android:maxLength="1"
-            style="@style/Base.V7.Widget.AppCompat.EditText"
             android:background="@drawable/old_edit"
             android:gravity="center_vertical|center_horizontal"
             android:layout_marginRight="10dp" />
@@ -100,7 +94,6 @@
             android:ems="10"
             android:id="@+id/editText7"
             android:maxLength="1"
-            style="@style/Base.V7.Widget.AppCompat.EditText"
             android:background="@drawable/old_edit"
             android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>

@@ -9,12 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class PiyangoActivity extends AppCompatActivity implements PiyangoFragment.OnFragmentInteractionListener {
+
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piyango);
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -26,6 +33,15 @@ public class PiyangoActivity extends AppCompatActivity implements PiyangoFragmen
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment2, fragment)
                 .commit();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TicketDialog dialog = new TicketDialog(PiyangoActivity.this,true);
+                dialog.show();
+            }
+        });
+
     }
 
     @Override

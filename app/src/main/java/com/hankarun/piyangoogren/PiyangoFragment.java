@@ -89,19 +89,6 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
 
         mRecyclerView.setAdapter(mAdapter);
 
-        TextWatcher watcher = new TextWatcher() {
-            public void onTextChanged(CharSequence s, int start,int before, int count)
-            {
-                // TODO Track text move to the next
-            }
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            public void afterTextChanged(Editable s) {
-            }
-        };
-
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -196,9 +183,9 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
             return temp;
         }
 
-        public String getIkramiye() {
+        public String getIkramiye(String hanes) {
             String temp = "";
-            if (hane.equals("6") || hane.equals("0")) {
+            if (hane.equals(hanes) || hane.equals("0")) {
                 temp += ikramiye + " TL İktamiye Kazanan Numara";
             } else {
                 temp += "Son " + hane + " rakamına göre " + ikramiye + " TL Kazanan Numara";
@@ -300,7 +287,7 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
 
         @Override
         public void onBindViewHolder(PiyangoAdapter.ViewHolder holder, int position) {
-            holder.main.setText(array.get(position).getIkramiye());
+            holder.main.setText(array.get(position).getIkramiye(array.get(0).hane));
             holder.numbers.setText(array.get(position).getNumbers());
         }
 
