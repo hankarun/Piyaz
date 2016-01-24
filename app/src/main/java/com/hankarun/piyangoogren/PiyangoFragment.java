@@ -230,7 +230,7 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
                         datesNormal.add(data.getString(data.getColumnIndex(GamesDatabaseHelper.GAMES_DATEVIEW)));
                     } while (data.moveToNext());
                     ArrayAdapter<String> spinner_adapter = new ArrayAdapter<>(getContext(),
-                            android.R.layout.simple_spinner_item, datesNormal);
+                            R.layout.spinner_item, datesNormal);
                     mSpinner.setAdapter(spinner_adapter);
                     mSpinner.setSelection(0);
                     getLoaderManager().initLoader(1, null, this);

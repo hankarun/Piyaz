@@ -70,7 +70,6 @@ public class PlotActivity extends AppCompatActivity implements LoaderManager.Loa
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, spinnerArray);
         spinner.setAdapter(spinnerArrayAdapter);
 
-        Log.d("type", order + "");
         spinner.setSelection(order);
         spinner.setOnItemSelectedListener(this);
 
