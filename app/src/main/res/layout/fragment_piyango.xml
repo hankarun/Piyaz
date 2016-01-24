@@ -38,6 +38,24 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:layout_gravity="center" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Bilet Numaranız"
+                android:id="@+id/baslik"
+                android:gravity="center_vertical|center_horizontal"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/numaraText"
+                android:gravity="center_vertical|center_horizontal"
+                android:visibility="gone" />
+
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

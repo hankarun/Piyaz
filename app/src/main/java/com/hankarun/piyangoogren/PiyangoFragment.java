@@ -44,6 +44,10 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
     RecyclerView mRecyclerView;
     @Bind(R.id.piyangoSpinner)
     Spinner mSpinner;
+    @Bind(R.id.baslik)
+    TextView mBaslik;
+    @Bind(R.id.numaraText)
+    TextView mNumaraText;
 
     private OnFragmentInteractionListener mListener;
 
@@ -75,6 +79,8 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
         View rootView = inflater.inflate(R.layout.fragment_piyango, container, false);
         ButterKnife.bind(this, rootView);
         mSpinner.setOnItemSelectedListener(this);
+        mNumaraText.setVisibility(View.GONE);
+        mBaslik.setVisibility(View.GONE);
         return rootView;
     }
 
@@ -96,6 +102,30 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    public void findNumber(String number) {
+        ArrayList<Piyango> temp = new ArrayList<>();
+        for (Piyango p : mList) {
+            Piyango a = p.checkNumber(number);
+            if (a != null) {
+                temp.add(a);
+            }
+        }
+        mAdapter.array = temp;
+        mAdapter.notifyDataSetChanged();
+        mBaslik.setVisibility(View.VISIBLE);
+        mNumaraText.setVisibility(View.VISIBLE);
+        mNumaraText.setText(number);
+    }
+
+    public String returnFirstElement() {
+        mAdapter.array = mList;
+        mAdapter.notifyDataSetChanged();
+        if (mList.size() > 0)
+            return mList.get(0).hane;
+        else
+            return "6";
     }
 
     @Override
@@ -147,20 +177,42 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
 
         public Piyango(String _ik, String _hane, String _num) {
             ikramiye = _ik;
-            hane = _hane;
             numaralar = new ArrayList<>();
             try {
-                _num = _num.replace("\"","");
-                _num = _num.replace("]","");
-                _num = _num.replace("[","");
+                _num = _num.replace("\"", "");
+                _num = _num.replace("]", "");
+                _num = _num.replace("[", "");
                 String[] ts = _num.split(",");
-                for (String s:ts) {
+                for (String s : ts) {
                     numaralar.add(s);
                 }
                 Collections.sort(numaralar);
             } catch (Exception e) {
                 Log.d("piyango", "object problem");
             }
+            if(_hane.equals("0"))
+                hane = numaralar.get(0).length()+"";
+            else
+                hane = _hane;
+        }
+
+        public Piyango() {
+            numaralar = new ArrayList<>();
+        }
+
+        public Piyango checkNumber(String number) {
+            Piyango temp = new Piyango();
+            temp.hane = hane;
+            temp.ikramiye = ikramiye;
+            for (String s : numaralar) {
+                if(number.subSequence(number.length() - Integer.parseInt(hane), number.length())
+                    .equals(s.subSequence(s.length() - Integer.parseInt(hane), s.length())))
+                    temp.numaralar.add(s);
+            }
+            if(temp.numaralar.size()>0)
+                return temp;
+            else
+                return null;
         }
 
         public String toString() {
@@ -171,12 +223,12 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
                 temp += "Son " + hane + " rakamına göre " + ikramiye + " TL Kazanan Numara";
             }
 
-            if(numaralar.size()>1)
+            if (numaralar.size() > 1)
                 temp += "lar";
 
             temp += "\n\n";
 
-            for(String s:numaralar){
+            for (String s : numaralar) {
                 temp += s + " ";
             }
             temp += "\n\n";
@@ -191,14 +243,15 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
                 temp += "Son " + hane + " rakamına göre " + ikramiye + " TL Kazanan Numara";
             }
 
-            if(numaralar.size()>1)
-                temp += "lar";;
+            if (numaralar.size() > 1)
+                temp += "lar";
+            ;
             return temp;
         }
 
         public String getNumbers() {
             String temp = "";
-            for(String s:numaralar){
+            for (String s : numaralar) {
                 temp += s + " ";
             }
             return temp;
@@ -256,6 +309,8 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mNumaraText.setVisibility(View.GONE);
+        mBaslik.setVisibility(View.GONE);
         getLoaderManager().restartLoader(1, null, this);
     }
 
@@ -269,7 +324,7 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
         void onFragmentInteraction(Uri uri);
     }
 
-    public class PiyangoAdapter extends RecyclerView.Adapter<PiyangoAdapter.ViewHolder>{
+    public class PiyangoAdapter extends RecyclerView.Adapter<PiyangoAdapter.ViewHolder> {
         ArrayList<Piyango> array;
 
         public PiyangoAdapter(ArrayList<Piyango> array) {
