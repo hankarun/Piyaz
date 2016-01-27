@@ -1,6 +1,7 @@
 package com.hankarun.piyangoogren;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -112,11 +114,30 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
                 temp.add(a);
             }
         }
-        mAdapter.array = temp;
-        mAdapter.notifyDataSetChanged();
-        mBaslik.setVisibility(View.VISIBLE);
-        mNumaraText.setVisibility(View.VISIBLE);
-        mNumaraText.setText(number);
+
+        String alert = "Üzgünüz biletinize ikramiye çıkmadı.";
+        if (temp.size() > 0) {
+            alert = "Biletinize \n";
+
+            for (Piyango p : temp) {
+                if (p.hane.equals(mList.get(0).hane))
+                    alert += p.ikramiye + " TL\n";
+                else
+                    alert += "Son " + p.hane + " rakamına göre " + p.ikramiye + " TL\n";
+            }
+            alert += "ikramiye çıktı. Tebrikler.";
+        }
+
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Bilet Numarası: " + number);
+        alertDialog.setMessage(alert);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Tamam",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 
     public String returnFirstElement() {
@@ -190,8 +211,8 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
             } catch (Exception e) {
                 Log.d("piyango", "object problem");
             }
-            if(_hane.equals("0"))
-                hane = numaralar.get(0).length()+"";
+            if (_hane.equals("0"))
+                hane = numaralar.get(0).length() + "";
             else
                 hane = _hane;
         }
@@ -205,11 +226,11 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
             temp.hane = hane;
             temp.ikramiye = ikramiye;
             for (String s : numaralar) {
-                if(number.subSequence(number.length() - Integer.parseInt(hane), number.length())
-                    .equals(s.subSequence(s.length() - Integer.parseInt(hane), s.length())))
+                if (number.subSequence(number.length() - Integer.parseInt(hane), number.length())
+                        .equals(s.subSequence(s.length() - Integer.parseInt(hane), s.length())))
                     temp.numaralar.add(s);
             }
-            if(temp.numaralar.size()>0)
+            if (temp.numaralar.size() > 0)
                 return temp;
             else
                 return null;

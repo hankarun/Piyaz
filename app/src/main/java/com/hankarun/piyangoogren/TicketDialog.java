@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -93,10 +94,17 @@ public class TicketDialog extends Dialog implements View.OnClickListener {
             public void onTextChanged(CharSequence s, int start,int before, int count)
             {
                 int current = nameViews.indexOf(getWindow().getCurrentFocus());
-                if(current+1<nameViews.size())
-                    nameViews.get(current+1).requestFocus();
-                else
-                    mSaveButton.requestFocus();
+                if(count==0){
+                    if (current - 1 > -1)
+                        nameViews.get(current - 1).requestFocus();
+                    else
+                        mSaveButton.requestFocus();
+                }else {
+                    if (current + 1 < nameViews.size())
+                        nameViews.get(current + 1).requestFocus();
+                    else
+                        mSaveButton.requestFocus();
+                }
             }
             public void beforeTextChanged(CharSequence s, int start,
                                           int count, int after) {
@@ -113,7 +121,8 @@ public class TicketDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(((Button) v).getText().equals("Search")){
+
+        if(((Button) v).getText().equals("Ara")){
             String temp = "";
             for(EditText e:nameViews)
                 temp += e.getText();

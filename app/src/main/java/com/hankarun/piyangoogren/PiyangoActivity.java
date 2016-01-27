@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import butterknife.Bind;
@@ -15,7 +16,7 @@ public class PiyangoActivity extends AppCompatActivity implements PiyangoFragmen
 
     @Bind(R.id.fab)
     FloatingActionButton fab;
-
+    PiyangoFragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,7 @@ public class PiyangoActivity extends AppCompatActivity implements PiyangoFragmen
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Milli Piyango Sonuçları");
 
-        PiyangoFragment fragment = PiyangoFragment.newInstance("","");
+        fragment = PiyangoFragment.newInstance("","");
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment2, fragment,"piyango")
@@ -51,7 +52,6 @@ public class PiyangoActivity extends AppCompatActivity implements PiyangoFragmen
 
     @Override
     public void dialogFinished(String numbers) {
-        PiyangoFragment myFragment = (PiyangoFragment) getSupportFragmentManager().findFragmentById(R.id.fragment2);
-        myFragment.findNumber(numbers);
+        fragment.findNumber(numbers);
     }
 }
