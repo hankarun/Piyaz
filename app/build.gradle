@@ -8,7 +8,7 @@ android {
         applicationId "com.hankarun.piyangoogren"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 8
+        versionCode 10
         versionName "1.2"
     }
     buildTypes {

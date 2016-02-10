@@ -175,7 +175,7 @@ public class PiyangoFragment extends Fragment implements LoaderManager.LoaderCal
                         new String[]{GamesDatabaseHelper.GAMES_DATE, GamesDatabaseHelper.GAMES_DATEVIEW},
                         GamesDatabaseHelper.GAMES_TYPE + " = 'piyango'",
                         null,
-                        null);
+                        GamesDatabaseHelper.GAMES_DATE + " DESC");
             case 1:
                 return new CursorLoader(getActivity(),
                         GamesContentProvider.CONTENT_URI,
